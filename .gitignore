@@ -1,0 +1,6 @@
+.DS_Store
+*.token
+*.key
+*.cert
+/dropbox
+/vendor
