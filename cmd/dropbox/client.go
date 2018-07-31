@@ -7,20 +7,24 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/dropbox/dropbox-sdk-go-unofficial/dropbox"
 	"github.com/google/uuid"
 	"github.com/pkg/errors"
 	"golang.org/x/oauth2"
 )
 
-func createClient(appKey, appSecret string) (*http.Client, *oauth2.Token, error) {
+func createClient(appKey, appSecret, domain string) (*http.Client, *oauth2.Token, error) {
 	conf := &oauth2.Config{
 		ClientID:     appKey,
 		ClientSecret: appSecret,
-		Scopes:       nil,
-		Endpoint: oauth2.Endpoint{
-			AuthURL:  "https://www.dropbox.com/oauth2/authorize",
-			TokenURL: "https://api.dropboxapi.com/oauth2/token",
-		},
+		Endpoint:     dropbox.OAuthEndpoint(domain),
+		/*
+			oauth2.Endpoint{
+				AuthURL:  "https://www.dropbox.com/oauth2/authorize",
+				TokenURL: "https://api.dropboxapi.com/oauth2/token",
+			},
+			Scopes:       nil,
+		*/
 	}
 
 	// Read token from file
