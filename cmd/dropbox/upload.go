@@ -24,8 +24,6 @@ type uploadCommand struct {
 	appSecret string
 	domain    string
 	verbose   bool
-	input     string
-	outpath   string
 }
 
 func init() {
